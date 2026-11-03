@@ -53,12 +53,12 @@ const sizeClasses: Record<TSDLabelSize, string> = {
     :for="resolvedFor"
     class="font-sd-sans font-medium inline-flex items-center gap-1"
     :class="[
-      sizeClasses[props.size ?? 'xs'],
-      props.uppercase ? 'uppercase tracking-wider' : '',
+      sizeClasses[size ?? 'xs'],
+      uppercase ? 'uppercase tracking-wider' : '',
       resolvedDisabled ? 'text-sd-fg-disabled cursor-not-allowed' : 'text-sd-fg-muted',
     ]"
   >
-    <slot>{{ props.label }}</slot>
+    <slot>{{ label }}</slot>
 
     <span
       v-if="resolvedRequired"
