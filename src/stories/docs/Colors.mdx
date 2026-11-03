@@ -1,0 +1,287 @@
+import { Meta, Canvas, ColorPalette, ColorItem } from '@storybook/addon-docs/blocks';
+import * as ThemeOverridesStories from './ThemeOverrides.stories';
+
+<Meta title="Overview/Colors & Overrides" />
+
+# Colors & Theme Overrides
+
+`@royal-duck/serving-duck` features a **3-tier semantic token architecture** built around CSS custom properties (`--sd-*`) and mapped directly into **Tailwind CSS v4** via `@theme inline`.
+
+---
+
+## 1. Token Architecture
+
+The design system separates color definitions into three distinct tiers:
+
+1. **Primitive Colors**: Raw hex values (e.g., `#6366f1` Indigo, `#fbbf24` Gold, `#020617` Deep Slate).
+2. **Semantic CSS Custom Properties**: Context-aware variables defined in `tokens.css` (e.g., `--sd-primary`, `--sd-bg-canvas`, `--sd-fg-primary`).
+3. **Tailwind CSS v4 Utilities**: Inline `@theme` mappings in `theme.css` (e.g., `bg-sd-primary`, `text-sd-fg`, `bg-sd-canvas`, `border-sd-border`).
+
+```
+┌─────────────────────────────────┐
+│       Consuming Application     │
+│   (Optionally overrides --sd-*) │
+└────────────────┬────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────┐
+│     Semantic CSS Variables      │
+│  (--sd-primary, --sd-bg-canvas) │
+└────────────────┬────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────┐
+│    Tailwind CSS v4 Utilities    │
+│  (bg-sd-primary, text-sd-fg)    │
+└─────────────────────────────────┘
+```
+
+Because Tailwind v4 utilities point directly to CSS variables, **any runtime or build-time override of `--sd-*` variables instantly ripples through all Tailwind classes and components** without requiring CSS recompilation!
+
+---
+
+## 2. Interactive Override Playground
+
+Use the interactive workbench below to test theme overrides in real time. Pick a preset or adjust the color pickers to see how components and surfaces adapt:
+
+<Canvas of={ThemeOverridesStories.Playground} />
+
+---
+
+## 3. Semantic Color Palette Reference
+
+All colors are calibrated for **WCAG AA contrast (≥ 4.5:1)** against their corresponding background surfaces.
+
+### Surfaces & Backgrounds
+
+| Token | Dark Mode Default | Light Mode Default | Tailwind Utility | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `--sd-bg-canvas` | `#020617` | `#f8fafc` | `bg-sd-canvas` | Lowest background level (body/viewport) |
+| `--sd-bg-surface` | `#0f172a` | `#ffffff` | `bg-sd-surface` | Default card, container, and dialog background |
+| `--sd-bg-elevated` | `#1e293b` | `#f1f5f9` | `bg-sd-elevated` | Floating dropdowns, hover states, popovers |
+
+<ColorPalette>
+  <ColorItem
+    title="Surfaces (--sd-bg-*)"
+    subtitle="Canvas, Surface, and Elevated containers"
+    colors={{
+      'Dark Canvas': '#020617',
+      'Dark Surface': '#0f172a',
+      'Dark Elevated': '#1e293b',
+      'Light Canvas': '#f8fafc',
+      'Light Surface': '#ffffff',
+      'Light Elevated': '#f1f5f9',
+    }}
+  />
+</ColorPalette>
+
+### Borders & Outlines
+
+| Token | Dark Mode Default | Light Mode Default | Tailwind Utility | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `--sd-border-default` | `#334155` | `#cbd5e1` | `border-sd-border` | Default component and card borders |
+| `--sd-border-subtle` | `#1e293b` | `#e2e8f0` | `border-sd-border-subtle` | Subtle separators and inner dividers |
+
+<ColorPalette>
+  <ColorItem
+    title="Borders (--sd-border-*)"
+    subtitle="Default and subtle boundary lines"
+    colors={{
+      'Dark Default': '#334155',
+      'Dark Subtle': '#1e293b',
+      'Light Default': '#cbd5e1',
+      'Light Subtle': '#e2e8f0',
+    }}
+  />
+</ColorPalette>
+
+### Typography & Foregrounds
+
+| Token | Dark Mode Default | Light Mode Default | Tailwind Utility | Contrast Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| `--sd-fg-primary` | `#f1f5f9` | `#0f172a` | `text-sd-fg` | Body text, forms (WCAG AA ≥ 4.5:1) |
+| `--sd-fg-heading` | `#e2e8f0` | `#1e293b` | `text-sd-fg-heading` | Headings and titles (`SDTitle`) |
+| `--sd-fg-muted` | `#94a3b8` | `#475569` | `text-sd-fg-muted` | Secondary text, helper labels (`SDLabel`) |
+| `--sd-fg-disabled` | `#7c8ba1` | `#64748b` | `text-sd-fg-disabled` | Inactive elements and placeholders |
+
+<ColorPalette>
+  <ColorItem
+    title="Foregrounds (--sd-fg-*)"
+    subtitle="WCAG AA accessible text hierarchy"
+    colors={{
+      'Dark Primary': '#f1f5f9',
+      'Dark Heading': '#e2e8f0',
+      'Dark Muted': '#94a3b8',
+      'Dark Disabled': '#7c8ba1',
+      'Light Primary': '#0f172a',
+      'Light Heading': '#1e293b',
+      'Light Muted': '#475569',
+      'Light Disabled': '#64748b',
+    }}
+  />
+</ColorPalette>
+
+### Brand Colors: Royal Indigo & Royal Duck Gold
+
+| Token | Dark Mode | Light Mode | Tailwind Utility | Purpose |
+| :--- | :--- | :--- | :--- | :--- |
+| `--sd-primary` | `#6366f1` | `#4f46e5` | `bg-sd-primary` | Primary brand accent & main CTAs |
+| `--sd-primary-hover` | `#818cf8` | `#4338ca` | `hover:bg-sd-primary-hover` | Interactive hover state |
+| `--sd-primary-fg` | `#ffffff` | `#ffffff` | `text-sd-primary-fg` | Foreground on primary fills |
+| `--sd-accent` | `#fbbf24` | `#d97706` | `bg-sd-accent` | Secondary Royal Duck Gold accent |
+| `--sd-accent-hover` | `#fcd34d` | `#b45309` | `hover:bg-sd-accent-hover` | Interactive hover state |
+| `--sd-accent-fg` | `#0f172a` | `#ffffff` | `text-sd-accent-fg` | Foreground on accent fills |
+
+<ColorPalette>
+  <ColorItem
+    title="Brand Primary (Royal Indigo)"
+    subtitle="Primary interactive color and fills"
+    colors={{
+      'Dark Primary': '#6366f1',
+      'Dark Primary Hover': '#818cf8',
+      'Light Primary': '#4f46e5',
+      'Light Primary Hover': '#4338ca',
+    }}
+  />
+  <ColorItem
+    title="Brand Accent (Royal Duck Gold)"
+    subtitle="Highlights, special badges, and game UI items"
+    colors={{
+      'Dark Accent': '#fbbf24',
+      'Dark Accent Hover': '#fcd34d',
+      'Light Accent': '#d97706',
+      'Light Accent Hover': '#b45309',
+    }}
+  />
+</ColorPalette>
+
+### Semantic Status Colors
+
+Calibrated for status indicators (`SDTitle` indicator dot, status badges, alerts):
+
+| Status | Dark Mode | Light Mode | Tailwind Utility |
+| :--- | :--- | :--- | :--- |
+| **Success** | `#34d399` | `#047857` | `bg-sd-status-success` / `text-sd-status-success` |
+| **Warning** | `#fbbf24` | `#b45309` | `bg-sd-status-warning` / `text-sd-status-warning` |
+| **Danger** | `#fb7185` | `#be123c` | `bg-sd-status-danger` / `text-sd-status-danger` |
+| **Info** | `#38bdf8` | `#0369a1` | `bg-sd-status-info` / `text-sd-status-info` |
+| **Neutral** | `#94a3b8` | `#475569` | `bg-sd-status-neutral` / `text-sd-status-neutral` |
+
+<ColorPalette>
+  <ColorItem
+    title="Semantic Statuses"
+    subtitle="Indicators, alerts, and operational signals"
+    colors={{
+      'Success (Dark)': '#34d399',
+      'Success (Light)': '#047857',
+      'Warning (Dark)': '#fbbf24',
+      'Warning (Light)': '#b45309',
+      'Danger (Dark)': '#fb7185',
+      'Danger (Light)': '#be123c',
+      'Info (Dark)': '#38bdf8',
+      'Info (Light)': '#0369a1',
+      'Neutral (Dark)': '#94a3b8',
+      'Neutral (Light)': '#475569',
+    }}
+  />
+</ColorPalette>
+
+---
+
+## 4. How Color Overrides Work
+
+Because all styling relies on CSS variables, you have full freedom to customize colors at any level of specificity.
+
+### A. Global Application Theme Override
+
+To skin the entire design system to match your organization's brand, re-declare the `--sd-*` variables on `:root` in your app's global stylesheet:
+
+```css
+/* In your app's main CSS (after importing theme.css or style.css) */
+:root {
+  /* Change brand primary to Cyan */
+  --sd-primary: #06b6d4;
+  --sd-primary-hover: #22d3ee;
+  --sd-primary-fg: #082f49;
+
+  /* Change brand accent to Rose */
+  --sd-accent: #f43f5e;
+  --sd-accent-hover: #fb7185;
+  --sd-accent-fg: #ffffff;
+
+  /* Customize focus ring */
+  --sd-ring-focus: #06b6d4;
+}
+```
+
+### B. Theme Switching (Dark vs Light Mode)
+
+The system defaults to **Dark Mode** out of the box on `:root`.
+
+To activate **Light Mode**, set `data-theme="light"` or add the `.light` class to your `<html>`, `<body>`, or any subtree container:
+
+```html
+<!-- Whole application in light mode -->
+<html lang="en" data-theme="light">
+  <body>
+    ...
+  </body>
+</html>
+
+<!-- Or on any container/card -->
+<div data-theme="light" class="bg-sd-surface p-6 rounded-sd-md border border-sd-border">
+  <SDTitle as="h2" title="Light Subtree" />
+</div>
+```
+
+To explicitly force **Dark Mode** on a subtree within a light-themed page:
+
+```html
+<section data-theme="dark" class="bg-sd-canvas text-sd-fg p-8">
+  <SDTitle as="h2" status="primary" title="Dark Cockpit View" />
+</section>
+```
+
+### C. Scoped Subtree Overrides
+
+You can create distinct color contexts for specific sections of your application (for example, a game HUD, a terminal modal, or a billing banner) by declaring CSS variables under a custom CSS class:
+
+```css
+/* Custom Gaming Cockpit / HUD */
+.hud-cockpit {
+  --sd-bg-canvas: #09090b;
+  --sd-bg-surface: #18181b;
+  --sd-border-default: #00f0ff;
+  --sd-primary: #00f0ff;
+  --sd-primary-hover: #38bdf8;
+  --sd-primary-fg: #09090b;
+  --sd-accent: #ff007f;
+}
+```
+
+```html
+<div class="hud-cockpit bg-sd-surface border border-sd-border p-6 rounded-sd-lg">
+  <SDTitle as="h3" status="primary" title="Ship Diagnostics" />
+  <!-- All child Serving Duck components will automatically inherit the HUD colors -->
+</div>
+```
+
+### D. Inline Component-Level Overrides
+
+For quick one-off tweaks, pass style overrides directly to component instances:
+
+```html
+<SDTitle
+  as="h2"
+  title="Special Event"
+  style="--sd-fg-heading: #ec4899;"
+/>
+```
+
+### E. Forced Colors & Accessibility Mode
+
+`tokens.css` contains built-in `@media (forced-colors: active)` rules that automatically translate `--sd-*` tokens to system keywords (`Canvas`, `CanvasText`, `ButtonText`, `Highlight`, `Mark`):
+
+- High-contrast mode users on Windows and assistive devices receive full contrast without any custom CSS.
+- Status dots on `SDTitle` automatically render a 1px border in forced-colors mode to remain clearly visible.
+

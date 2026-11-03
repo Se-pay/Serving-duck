@@ -1,0 +1,24 @@
+<style>
+@keyframes sb-prevent-flash {
+    0% { opacity: 0; }
+    99% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  body {
+    animation: sb-prevent-flash .5s forwards;
+  }
+  /* Tell the browser engine to default to dark rendering instantly */
+  :root {
+    color-scheme: dark;
+  }
+
+  /* Target the absolute base of the document to kill the initial white flash */
+  html, body, #storybook-root, #storybook-docs {
+    background-color: #020617!important; 
+  }
+  body.sb-show-main {
+    background-color: #020617 !important;
+    transition: background-color 0s; /* Prevent default transition delays */
+  }
+</style>
