@@ -1,0 +1,45 @@
+@import "./tokens.css";
+
+@theme inline {
+  /* Semantic Surface & Border Utilities (bg-sd-canvas, border-sd-border, etc.) */
+  --color-sd-canvas: var(--sd-bg-canvas);
+  --color-sd-surface: var(--sd-bg-surface);
+  --color-sd-elevated: var(--sd-bg-elevated);
+  --color-sd-border: var(--sd-border-default);
+  --color-sd-border-subtle: var(--sd-border-subtle);
+
+  /* Semantic Foreground Utilities (text-sd-fg, text-sd-fg-heading, etc.) */
+  --color-sd-fg: var(--sd-fg-primary);
+  --color-sd-fg-heading: var(--sd-fg-heading);
+  --color-sd-fg-muted: var(--sd-fg-muted);
+  --color-sd-fg-disabled: var(--sd-fg-disabled);
+
+  /* Brand & Accent Utilities */
+  --color-sd-primary: var(--sd-primary);
+  --color-sd-primary-hover: var(--sd-primary-hover);
+  --color-sd-primary-fg: var(--sd-primary-fg);
+  --color-sd-accent: var(--sd-accent);
+  --color-sd-accent-hover: var(--sd-accent-hover);
+  --color-sd-accent-fg: var(--sd-accent-fg);
+
+  /* Status Utilities */
+  --color-sd-status-success: var(--sd-status-success);
+  --color-sd-status-warning: var(--sd-status-warning);
+  --color-sd-status-danger: var(--sd-status-danger);
+  --color-sd-status-info: var(--sd-status-info);
+  --color-sd-status-neutral: var(--sd-status-neutral);
+
+  /* Focus Ring */
+  --color-sd-ring: var(--sd-ring-focus);
+
+  /* Typography Utilities (font-sd-sans, font-sd-display, font-sd-mono) */
+  --font-sd-sans: var(--sd-font-sans);
+  --font-sd-display: var(--sd-font-display);
+  --font-sd-mono: var(--sd-font-mono);
+
+  /* Radius Utilities (rounded-sd-sm, rounded-sd-md, rounded-sd-lg) */
+  --radius-sd-sm: var(--sd-radius-sm);
+  --radius-sd-md: var(--sd-radius-md);
+  --radius-sd-lg: var(--sd-radius-lg);
+}
+
