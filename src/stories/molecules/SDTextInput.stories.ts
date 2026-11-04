@@ -70,10 +70,9 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Test: Story = {
+export const TestText: Story = {
   args: {
     label: 'Default',
-    id: 'test-story-id'
   },
   play: async ({ canvas, userEvent }: StoryContext) => {
     await userEvent.hover(canvas.getByLabelText('Default'));

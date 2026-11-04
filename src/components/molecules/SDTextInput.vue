@@ -3,12 +3,14 @@ import type { TSDMediumSize, TSDStatus } from '@/types/common.ts';
 import { getSizeClasses, getStatusClasses } from '@/utils/variantStyling.ts';
 import { computed, ref, useId, type ComputedRef, type ModelRef, type Ref } from 'vue';
 import SDBaseInput from '../atoms/SDBaseInput.vue';
+import SDErrorMessage from '../atoms/SDErrorMessage.vue';
 import SDFormField from '../atoms/SDFormField.vue';
 import SDIcon from '../atoms/SDIcon.vue';
 import SDLabel from '../atoms/SDLabel.vue';
 
 export interface ISDTextInputProps {
   modelValue: string | undefined | null;
+  type?: 'text' | 'password',
   label?: string;
   id?: string;
   name?: string;
@@ -26,6 +28,7 @@ export interface ISDTextInputProps {
 
 defineOptions({ inheritAttrs: false });
 const props: ISDTextInputProps = withDefaults(defineProps<ISDTextInputProps>(), {
+  type: 'text',
   size: 'md',
   status: 'neutral',
   required: undefined,
@@ -88,7 +91,7 @@ const resolvedStatus: ComputedRef<TSDStatus> = computed(() => {
       <SDBaseInput
         v-bind="$attrs"
         v-model="value"
-        type="text"
+        :type="type"
       />
 
       <!-- suffix placeholder (icons, units, etc.) -->
@@ -107,17 +110,10 @@ const resolvedStatus: ComputedRef<TSDStatus> = computed(() => {
 
     <!-- TODO: Add hint field or tooltip-->
     <!-- error-message -->
-    <div
-      v-if="invalid && errorMessage"
-      :id="errorId"
-      class="text-xs tracking-wider"
-      :class="[
-        getStatusClasses(resolvedStatus, 'text')
-      ]"
-      role="alert"
-      aria-live="polite"
-    >
-      <slot name="errorMessage">{{ errorMessage }}</slot>
-    </div>
+    <SDErrorMessage
+      :invalid="invalid"
+      :error-message="errorMessage"
+      :error-id="errorId"
+    />
   </SDFormField>
 </template>

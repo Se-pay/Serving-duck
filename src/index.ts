@@ -1,7 +1,7 @@
 import type { App, Plugin } from 'vue';
 
 import { SDBaseInput, SDFormField, SDIcon, SDLabel, SDTitle } from './components/atoms';
-import { SDTextInput } from './components/molecules';
+import { SDPasswordInput, SDTextInput } from './components/molecules';
 
 export * from './components/atoms';
 export * from './components/molecules';
@@ -28,6 +28,7 @@ export const ServingDuck: Plugin = {
     app.component('SDLabel', SDLabel);
 
     // molecules
+    app.component('SDPasswordInput', SDPasswordInput);
     app.component('SDTextInput', SDTextInput);
   },
 };
@@ -42,6 +43,7 @@ declare module 'vue' {
     SDTitle: typeof SDTitle;
 
     // molecules
+    SDPasswordInput: typeof SDPasswordInput;
     SDTextInput: typeof SDTextInput;
   }
 }

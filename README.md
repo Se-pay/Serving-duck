@@ -104,3 +104,14 @@ npm run build
 npm run build-storybook
 ```
 
+## Creating Components
+
+Create the component under components (decide logically if it is an atom, molecule, organism or template).
+
+Add or update an index.ts file in the components folder to export the component and its types.
+
+Add the new component to the global index.ts file in the install script and the GlobalComponents definition.
+
+Create a Story for the component in the stories folder.
+
+Create a Test for the component in the __tests__ folder. Ensure all tests pass and all storybook tests pass.
