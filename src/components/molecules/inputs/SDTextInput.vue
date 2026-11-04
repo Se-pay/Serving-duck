@@ -96,10 +96,10 @@ const resolvedStatus: ComputedRef<TSDStatus> = computed(() => {
 
       <!-- Error Icon -->
       <SDIcon
+        v-if="invalid"
         name="x-circle"
         :status="resolvedStatus"
         :size="size"
-        v-if="invalid"
       >
         <slot name="errorIcon"></slot>
       </SDIcon>

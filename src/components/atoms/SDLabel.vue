@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { computed, type ComputedRef } from 'vue';
 
-import type { TSDSize } from '@/types/common';
-import { getSizeClasses } from '@/utils/variantStyling';
+import type { TSDSize } from '../../types/common';
+import { getSizeClasses } from '../../utils/variantStyling';
 import {
   type ISDFormFieldContext,
   resolveFormFieldValue,
