@@ -59,10 +59,10 @@ const resolvedDisabled: ComputedRef<boolean> = computed((): boolean =>
 
 <template>
   <input
+    :id="resolvedId"
     v-model="value"
     class="outline-none bg-transparent w-full h-full"
     :type="type"
-    :id="resolvedId"
     :name="resolvedName"
     :required="resolvedRequired"
     :readonly="resolvedReadonly"

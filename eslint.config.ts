@@ -79,6 +79,7 @@ export default defineConfigWithVueTs(
       'vue/require-default-prop': 'off',
       'vue/no-required-prop-with-default': 'off',
       'vue/no-template-shadow': 'off',
+      'vue/attributes-order': 'error',
       'vue/max-attributes-per-line': [
         'error',
         {
