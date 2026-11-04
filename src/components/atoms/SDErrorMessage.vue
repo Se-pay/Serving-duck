@@ -17,7 +17,7 @@ withDefaults(defineProps<ISDErrorMessageProps>(), {
 
 <template>
   <div
-    v-if="invalid && errorMessage"
+    v-if="invalid && (errorMessage || $slots['default'])"
     :id="errorId"
     class="text-xs tracking-wider"
     :class="[
@@ -26,6 +26,6 @@ withDefaults(defineProps<ISDErrorMessageProps>(), {
     role="alert"
     aria-live="polite"
   >
-    {{ errorMessage }}
+    <slot>{{ errorMessage }}</slot>
   </div>
 </template>

@@ -112,8 +112,9 @@ const resolvedStatus: ComputedRef<TSDStatus> = computed(() => {
     <!-- error-message -->
     <SDErrorMessage
       :invalid="invalid"
-      :error-message="errorMessage"
       :error-id="errorId"
-    />
+    >
+      <slot name="errorMessage">{{ errorMessage }}</slot>
+    </SDErrorMessage>
   </SDFormField>
 </template>

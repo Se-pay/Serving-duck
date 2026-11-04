@@ -59,7 +59,7 @@ const resolvedStatus: ComputedRef<TSDStatus> = computed(() => {
     :id="resolvedId"
     :name="name"
     :label="label"
-    :described-by="invalid ? errorId : describedBy"
+    :described-by="(invalid && (errorMessage || $slots['errorMessage'])) ? errorId : describedBy"
     :required="required"
     :disabled="disabled"
     :invalid="invalid"
@@ -97,6 +97,7 @@ const resolvedStatus: ComputedRef<TSDStatus> = computed(() => {
       <SDIcon
         :name="type === 'password' ? 'eye' : 'eye-off'"
         :size="size"
+        label="Show password"
         role="button"
         :aria-controls="resolvedId"
         :aria-expanded="type === 'text'"
@@ -124,8 +125,9 @@ const resolvedStatus: ComputedRef<TSDStatus> = computed(() => {
 
     <SDErrorMessage
       :invalid="invalid"
-      :error-message="errorMessage"
       :error-id="errorId"
-    />
+    >
+      <slot name="errorMessage">{{ errorMessage }}</slot>
+    </SDErrorMessage>
   </SDFormField>
 </template>
