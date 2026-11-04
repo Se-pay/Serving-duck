@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { TSDMediumSize, TSDStatus } from '@/types/common.ts';
-import { getSizeClasses, getStatusClasses } from '@/utils/variantStyling.ts';
+import type { TSDMediumSize, TSDStatus } from '../../../types/common.ts';
+import { getSizeClasses, getStatusClasses } from '../../../utils/variantStyling.ts';
 import { computed, ref, useId, type ComputedRef, type ModelRef, type Ref } from 'vue';
-import SDBaseInput from '../atoms/SDBaseInput.vue';
-import SDFormField from '../atoms/SDFormField.vue';
-import SDIcon from '../atoms/SDIcon.vue';
-import SDLabel from '../atoms/SDLabel.vue';
+import SDBaseInput from '../../atoms/SDBaseInput.vue';
+import SDFormField from '../../atoms/SDFormField.vue';
+import SDIcon from '../../atoms/SDIcon.vue';
+import SDLabel from '../../atoms/SDLabel.vue';
 
 export interface ISDTextInputProps {
   modelValue: string | undefined | null;

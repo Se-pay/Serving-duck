@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 import SDIcon from '@/components/atoms/SDIcon.vue';
 import SDLabel from '@/components/atoms/SDLabel.vue';
-import SDTextInput from '@/components/molecules/SDTextInput.vue';
+import SDTextInput from '@/components/molecules/inputs/SDTextInput.vue';
 import type { TSDMediumSize, TSDStatus } from '@/types/common';
 
 describe('SDTextInput', (): void => {

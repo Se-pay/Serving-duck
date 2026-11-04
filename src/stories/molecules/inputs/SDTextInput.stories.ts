@@ -1,9 +1,9 @@
-import SDTextInput from '@/components/molecules/SDTextInput.vue';
+import SDTextInput from '@/components/molecules/inputs/SDTextInput.vue';
 import type { Meta, StoryContext, StoryObj } from '@storybook/vue3-vite';
 import { expect } from 'storybook/test';
 
 const meta: Meta<typeof SDTextInput> = {
-  title: 'Molecules/SDTextInput',
+  title: 'Molecules/Inputs/SDTextInput',
   component: SDTextInput,
   tags: ['autodocs'],
   argTypes: {
