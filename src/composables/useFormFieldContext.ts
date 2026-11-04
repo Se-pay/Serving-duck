@@ -2,6 +2,8 @@ import { inject, type InjectionKey, type MaybeRefOrGetter, toValue } from 'vue';
 
 export interface ISDFormFieldContext {
   id?: MaybeRefOrGetter<string | undefined>;
+  name?: MaybeRefOrGetter<string | undefined>;
+  label?: MaybeRefOrGetter<string | undefined>;
   describedBy?: MaybeRefOrGetter<string | undefined>;
   required?: MaybeRefOrGetter<boolean | undefined>;
   readonly?: MaybeRefOrGetter<boolean | undefined>;
@@ -11,6 +13,8 @@ export interface ISDFormFieldContext {
 
 export interface ISDResolvedFormFieldContext {
   id: string | undefined;
+  name: string | undefined;
+  label: string | undefined;
   describedBy: string | undefined;
   required: boolean;
   readonly: boolean;

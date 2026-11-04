@@ -18,15 +18,14 @@ const withServingDuckTheme: Decorator = (
   const htmlTag: HTMLElement = document.documentElement;
   const bodyTag: HTMLElement = document.body;
 
+  bodyTag.style.backgroundColor = '#222325'; // Tailwind slate-800
   if (selectedTheme !== 'side-by-side') {
     htmlTag.setAttribute('data-theme', selectedTheme);
     bodyTag.classList.add('bg-sd-canvas', 'text-sd-fg');
-    bodyTag.style.backgroundColor = ''; // Clear manual overrides
   } else {
     // For side-by-side, apply a neutral dark-gray behind the two cards
     htmlTag.removeAttribute('data-theme');
     bodyTag.classList.remove('bg-sd-canvas', 'text-sd-fg');
-    bodyTag.style.backgroundColor = '#1e293b'; // Tailwind slate-800
   }
 
   if (selectedTheme === 'side-by-side') {
@@ -52,9 +51,7 @@ const withServingDuckTheme: Decorator = (
       return { selectedTheme };
     },
     template: `
-      <!-- Removed bg-sd-canvas here since the body tag now handles it,
-           leaving just your container styling -->
-      <div :data-theme="selectedTheme" class="p-6 rounded-sd-md border border-sd-border">
+      <div :data-theme="selectedTheme" class="bg-sd-canvas p-6 rounded-sd-md border border-sd-border">
         <story />
       </div>
     `,

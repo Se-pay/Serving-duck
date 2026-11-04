@@ -127,9 +127,11 @@ All colors are calibrated for **WCAG AA contrast (≥ 4.5:1)** against their cor
 | :--- | :--- | :--- | :--- | :--- |
 | `--sd-primary` | `#6366f1` | `#4f46e5` | `bg-sd-primary` | Primary brand accent & main CTAs |
 | `--sd-primary-hover` | `#818cf8` | `#4338ca` | `hover:bg-sd-primary-hover` | Interactive hover state |
-| `--sd-primary-fg` | `#ffffff` | `#ffffff` | `text-sd-primary-fg` | Foreground on primary fills |
+| `--sd-primary-focus` | `#a5b4fc` | `#3730a3` | `focus-visible:outline-sd-primary-focus` | Interactive focus state |
+| `--sd-primary-fg` | `#000000` | `#ffffff` | `text-sd-primary-fg` | Foreground on primary fills |
 | `--sd-accent` | `#fbbf24` | `#d97706` | `bg-sd-accent` | Secondary Royal Duck Gold accent |
 | `--sd-accent-hover` | `#fcd34d` | `#b45309` | `hover:bg-sd-accent-hover` | Interactive hover state |
+| `--sd-accent-focus` | `#fde68a` | `#92400e` | `focus-visible:outline-sd-accent-focus` | Interactive focus state |
 | `--sd-accent-fg` | `#0f172a` | `#ffffff` | `text-sd-accent-fg` | Foreground on accent fills |
 
 <ColorPalette>
@@ -139,8 +141,10 @@ All colors are calibrated for **WCAG AA contrast (≥ 4.5:1)** against their cor
     colors={{
       'Dark Primary': '#6366f1',
       'Dark Primary Hover': '#818cf8',
+      'Dark Primary Focus': '#a5b4fc',
       'Light Primary': '#4f46e5',
       'Light Primary Hover': '#4338ca',
+      'Light Primary Focus': '#3730a3',
     }}
   />
   <ColorItem
@@ -149,23 +153,35 @@ All colors are calibrated for **WCAG AA contrast (≥ 4.5:1)** against their cor
     colors={{
       'Dark Accent': '#fbbf24',
       'Dark Accent Hover': '#fcd34d',
+      'Dark Accent Focus': '#fde68a',
       'Light Accent': '#d97706',
       'Light Accent Hover': '#b45309',
+      'Light Accent Focus': '#92400e',
     }}
   />
 </ColorPalette>
 
 ### Semantic Status Colors
 
-Calibrated for status indicators (`SDTitle` indicator dot, status badges, alerts):
+Calibrated for status indicators (`SDTitle` indicator dot, status badges, alerts, and interactive inputs):
 
-| Status | Dark Mode | Light Mode | Tailwind Utility |
+| Token | Dark Mode | Light Mode | Tailwind Utility |
 | :--- | :--- | :--- | :--- |
-| **Success** | `#34d399` | `#047857` | `bg-sd-status-success` / `text-sd-status-success` |
-| **Warning** | `#fbbf24` | `#b45309` | `bg-sd-status-warning` / `text-sd-status-warning` |
-| **Danger** | `#fb7185` | `#be123c` | `bg-sd-status-danger` / `text-sd-status-danger` |
-| **Info** | `#38bdf8` | `#0369a1` | `bg-sd-status-info` / `text-sd-status-info` |
-| **Neutral** | `#94a3b8` | `#475569` | `bg-sd-status-neutral` / `text-sd-status-neutral` |
+| `--sd-status-success` | `#34d399` | `#047857` | `bg-sd-status-success` / `text-sd-status-success` |
+| `--sd-status-success-hover` | `#6ee7b7` | `#065f46` | `hover:bg-sd-status-success-hover` / `hover:border-sd-status-success-hover` |
+| `--sd-status-success-focus` | `#a7f3d0` | `#064e3b` | `focus-visible:outline-sd-status-success-focus` |
+| `--sd-status-warning` | `#fbbf24` | `#b45309` | `bg-sd-status-warning` / `text-sd-status-warning` |
+| `--sd-status-warning-hover` | `#fcd34d` | `#92400e` | `hover:bg-sd-status-warning-hover` / `hover:border-sd-status-warning-hover` |
+| `--sd-status-warning-focus` | `#fde68a` | `#78350f` | `focus-visible:outline-sd-status-warning-focus` |
+| `--sd-status-danger` | `#fb7185` | `#be123c` | `bg-sd-status-danger` / `text-sd-status-danger` |
+| `--sd-status-danger-hover` | `#fda4af` | `#9f1239` | `hover:bg-sd-status-danger-hover` / `hover:border-sd-status-danger-hover` |
+| `--sd-status-danger-focus` | `#fecdd3` | `#881337` | `focus-visible:outline-sd-status-danger-focus` |
+| `--sd-status-info` | `#38bdf8` | `#0369a1` | `bg-sd-status-info` / `text-sd-status-info` |
+| `--sd-status-info-hover` | `#7dd3fc` | `#075985` | `hover:bg-sd-status-info-hover` / `hover:border-sd-status-info-hover` |
+| `--sd-status-info-focus` | `#bae6fd` | `#0c4a6e` | `focus-visible:outline-sd-status-info-focus` |
+| `--sd-status-neutral` | `#94a3b8` | `#475569` | `bg-sd-status-neutral` / `text-sd-status-neutral` |
+| `--sd-status-neutral-hover` | `#cbd5e1` | `#334155` | `hover:bg-sd-status-neutral-hover` / `hover:border-sd-status-neutral-hover` |
+| `--sd-status-neutral-focus` | `#e2e8f0` | `#1e293b` | `focus-visible:outline-sd-status-neutral-focus` |
 
 <ColorPalette>
   <ColorItem
@@ -182,6 +198,44 @@ Calibrated for status indicators (`SDTitle` indicator dot, status badges, alerts
       'Info (Light)': '#0369a1',
       'Neutral (Dark)': '#94a3b8',
       'Neutral (Light)': '#475569',
+    }}
+  />
+</ColorPalette>
+
+<ColorPalette>
+  <ColorItem
+    title="Semantic Statuses Hover"
+    subtitle="Indicators, alerts, and operational signals"
+    colors={{
+      'Success-Hover (Dark)': '#6ee7b7',
+      'Success-Hover (Light)': '#065f46',
+      'Warning-Hover (Dark)': '#fcd34d',
+      'Warning-Hover (Light)': '#92400e',
+      'Danger-Hover (Dark)': '#fda4af',
+      'Danger-Hover (Light)': '#9f1239',
+      'Info-Hover (Dark)': '#7dd3fc',
+      'Info-Hover (Light)': '#075985',
+      'Neutral-Hover (Dark)': '#cbd5e1',
+      'Neutral-Hover (Light)': '#334155',
+    }}
+  />
+</ColorPalette>
+
+<ColorPalette>
+  <ColorItem
+    title="Semantic Statuses Focus"
+    subtitle="Indicators, alerts, and operational signals"
+    colors={{
+      'Success-Focus (Dark)': '#a7f3d0',
+      'Success-Focus (Light)': '#064e3b',
+      'Warning-Focus (Dark)': '#fde68a',
+      'Warning-Focus (Light)': '#78350f',
+      'Danger-Focus (Dark)': '#fecdd3',
+      'Danger-Focus (Light)': '#881337',
+      'Info-Focus (Dark)': '#bae6fd',
+      'Info-Focus (Light)': '#0c4a6e',
+      'Neutral-Focus (Dark)': '#e2e8f0',
+      'Neutral-Focus (Light)': '#1e293b',
     }}
   />
 </ColorPalette>

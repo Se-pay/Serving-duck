@@ -17,17 +17,29 @@
   /* Brand & Accent Utilities */
   --color-sd-primary: var(--sd-primary);
   --color-sd-primary-hover: var(--sd-primary-hover);
+  --color-sd-primary-focus: var(--sd-primary-focus);
   --color-sd-primary-fg: var(--sd-primary-fg);
   --color-sd-accent: var(--sd-accent);
   --color-sd-accent-hover: var(--sd-accent-hover);
+  --color-sd-accent-focus: var(--sd-accent-focus);
   --color-sd-accent-fg: var(--sd-accent-fg);
 
   /* Status Utilities */
   --color-sd-status-success: var(--sd-status-success);
+  --color-sd-status-success-hover: var(--sd-status-success-hover);
+  --color-sd-status-success-focus: var(--sd-status-success-focus);
   --color-sd-status-warning: var(--sd-status-warning);
+  --color-sd-status-warning-hover: var(--sd-status-warning-hover);
+  --color-sd-status-warning-focus: var(--sd-status-warning-focus);
   --color-sd-status-danger: var(--sd-status-danger);
+  --color-sd-status-danger-hover: var(--sd-status-danger-hover);
+  --color-sd-status-danger-focus: var(--sd-status-danger-focus);
   --color-sd-status-info: var(--sd-status-info);
+  --color-sd-status-info-hover: var(--sd-status-info-hover);
+  --color-sd-status-info-focus: var(--sd-status-info-focus);
   --color-sd-status-neutral: var(--sd-status-neutral);
+  --color-sd-status-neutral-hover: var(--sd-status-neutral-hover);
+  --color-sd-status-neutral-focus: var(--sd-status-neutral-focus);
 
   /* Focus Ring */
   --color-sd-ring: var(--sd-ring-focus);

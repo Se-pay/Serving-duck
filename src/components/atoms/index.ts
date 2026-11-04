@@ -7,13 +7,15 @@ export {
   type ISDFormFieldProps
 } from './SDFormField.vue';
 export {
+  default as SDIcon,
+  type ISDIconProps
+} from './SDIcon.vue';
+export {
   default as SDLabel,
-  type ISDLabelProps,
-  type TSDLabelSize
+  type ISDLabelProps
 } from './SDLabel.vue';
 export {
   default as SDTitle,
   type ISDTitleProps,
   type TSDTitleTag
 } from './SDTitle.vue';
-

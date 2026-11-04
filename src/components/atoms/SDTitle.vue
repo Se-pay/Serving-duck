@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { useSizeClasses, useStatusClasses, useWeightClasses } from '../../composables/useVariantStyling';
-import type { TSDBasicSize, TSDStatus, TSDWeight } from '../../types/common';
+import type { TSDSize, TSDStatus, TSDWeight } from '../../types/common';
+import { getSizeClasses, getStatusClasses, getWeightClasses } from '../../utils/variantStyling';
 
 export type TSDTitleTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 export interface ISDTitleProps {
   title?: string;
-  size?: TSDBasicSize;
+  size?: TSDSize;
   fontWeight?: TSDWeight;
   as?: TSDTitleTag;
   status?: TSDStatus;
@@ -29,8 +29,8 @@ withDefaults(defineProps<ISDTitleProps>(), {
     :is="as ?? 'h1'"
     class="font-sd-display text-sd-fg-heading flex items-center gap-2"
     :class="[
-      useSizeClasses(size ?? 'md', 'text'),
-      useWeightClasses(fontWeight ?? 'semibold'),
+      getSizeClasses(size ?? 'md', 'text'),
+      getWeightClasses(fontWeight ?? 'semibold'),
       uppercase ? 'uppercase tracking-wider' : '',
     ]"
   >
@@ -39,7 +39,7 @@ withDefaults(defineProps<ISDTitleProps>(), {
       aria-hidden="true"
       class="w-3 h-3 shrink-0 rounded-full forced-colors:border forced-colors:border-[CanvasText]"
       :class="[
-        useStatusClasses(status, 'bg')
+        getStatusClasses(status, 'bg')
       ]"
     ></span>
 

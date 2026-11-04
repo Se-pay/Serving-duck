@@ -4,6 +4,8 @@ import { SD_FORM_FIELD_KEY } from '../../composables/useFormFieldContext';
 
 export interface ISDFormFieldProps {
   id?: string;
+  name?: string;
+  label?: string;
   describedBy?: string;
   required?: boolean;
   readonly?: boolean;
@@ -16,6 +18,8 @@ const fallbackId: string = useId();
 
 provide(SD_FORM_FIELD_KEY, {
   id: () => props.id ?? fallbackId,
+  name: () => props.name ?? props.id ?? fallbackId,
+  label: () => props.label,
   describedBy: () => props.describedBy,
   required: () => props.required,
   readonly: () => props.readonly,
@@ -26,7 +30,7 @@ provide(SD_FORM_FIELD_KEY, {
 </script>
 
 <template>
-  <div class="flex flex-col gap-1.5">
+  <div class="flex flex-col gap-1">
     <slot></slot>
   </div>
 </template>

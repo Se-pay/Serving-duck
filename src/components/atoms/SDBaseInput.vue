@@ -1,41 +1,44 @@
 <script lang="ts" setup>
-import { computed, type ComputedRef, type ModelRef } from 'vue';
+import { computed, useId, type ComputedRef, type ModelRef } from 'vue';
 import { resolveFormFieldValue, useFormFieldContext, type ISDFormFieldContext } from '../../composables/useFormFieldContext';
-import { useSizeClasses, useStatusClasses } from '../../composables/useVariantStyling';
-import type { TSDBasicSize, TSDStatus } from '../../types/common';
 
 export interface ISDBaseInputProps {
   modelValue: string | undefined | null;
   type?: 'text' | 'password' | 'email' | 'number' | 'search' | 'tel' | 'url';
   id?: string;
-  size?: TSDBasicSize;
+  name?: string;
+  label?: string;
   describedBy?: string;
   invalid?: boolean;
   required?: boolean;
   disabled?: boolean;
   readonly?: boolean;
-  placeholder?: string;
-  status?: TSDStatus;
 }
 
-defineEmits(['update:modelValue']);
 const props: ISDBaseInputProps = withDefaults(defineProps<ISDBaseInputProps>(), {
   type: 'text',
-  size: 'md',
   id: undefined,
+  name: undefined,
+  label: undefined,
   describedBy: undefined,
   invalid: undefined,
   required: undefined,
   readonly: undefined,
   disabled: undefined,
-  placeholder: '',
 });
 
 const value: ModelRef<string | undefined | null> = defineModel<string | undefined | null, 'modelValue'>({ default: '' });
 const fieldContext: ISDFormFieldContext | undefined = useFormFieldContext();
+const fallbackId: string = useId();
 
-const resolvedId: ComputedRef<string | undefined> = computed((): string | undefined =>
-  resolveFormFieldValue<string | undefined>(props.id, fieldContext?.id, undefined),
+const resolvedId: ComputedRef<string> = computed((): string =>
+  resolveFormFieldValue<string>(props.id, fieldContext?.id, fallbackId),
+);
+const resolvedName: ComputedRef<string> = computed((): string =>
+  resolveFormFieldValue<string>(props.name, fieldContext?.name, resolvedId.value),
+);
+const resolvedLabel: ComputedRef<string | undefined> = computed((): string | undefined =>
+  resolveFormFieldValue<string | undefined>(props.label, fieldContext?.label, undefined),
 );
 const resolvedDescribedBy: ComputedRef<string | undefined> = computed((): string | undefined =>
   resolveFormFieldValue<string | undefined>(props.describedBy, fieldContext?.describedBy, undefined),
@@ -57,21 +60,15 @@ const resolvedDisabled: ComputedRef<boolean> = computed((): boolean =>
 <template>
   <input
     v-model="value"
+    class="outline-none bg-transparent w-full h-full"
     :type="type"
-    class="w-full bg-sd-surface border-sd-border rounded-lg focus:ring-1 focus:outline-none transition"
-    :class="[
-      resolvedDisabled ? 'text-sd-fg-disabled cursor-not-allowed' : 'placeholder-sd-fg-disabled text-sd-fg-muted',
-      useSizeClasses(size ?? 'md', 'p'),
-      useSizeClasses(size ?? 'md', 'text'),
-      useStatusClasses(status ?? 'neutral', 'border'),
-      useStatusClasses(status ?? 'neutral', 'focus'),
-    ]"
     :id="resolvedId"
+    :name="resolvedName"
     :required="resolvedRequired"
     :readonly="resolvedReadonly"
     :disabled="resolvedDisabled"
-    :placeholder="placeholder"
     :aria-describedby="resolvedDescribedBy"
-    :aria-invalid="(resolvedInvalid || status === 'danger') ? 'true' : undefined"
+    :aria-invalid="resolvedInvalid"
+    :aria-label="resolvedLabel"
   />
 </template>

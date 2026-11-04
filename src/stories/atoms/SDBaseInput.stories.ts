@@ -8,46 +8,49 @@ const meta: Meta<typeof SDBaseInput> = {
   argTypes: {
     modelValue: {
       type: { name: 'string' },
+      control: 'text',
       description: 'The v-model binding for the input',
-    },
-    size: {
-      type: { name: 'string' },
-      description: 'The size of the input',
-      control: 'select',
-      options: ['xs', 'sm', 'md'],
     },
     type: {
       type: { name: 'string' },
-      description: 'The type of input',
-      control: {
-        type: 'radio',
-      },
-    },
-    status: {
-      type: { name: 'string' },
-      description: 'Status of the input',
       control: 'select',
-      options: ['success', 'warning', 'danger', 'info', 'neutral', 'primary', 'accent'],
+      options: ['number', 'text', 'password', 'email', 'search', 'tel', 'url'],
+      description: 'The type of input',
     },
     id: {
       type: { name: 'string' },
+      control: 'text',
       description: 'The id of the input',
     },
-    placeholder: {
+    name: {
       type: { name: 'string' },
-      description: 'The placeholder of the input',
+      control: 'text',
+      description: 'The name of the input',
+    },
+    describedBy: {
+      type: { name: 'string' },
+      control: 'text',
+      description: 'Ids of the elements that describe the input',
     },
     disabled: {
       type: { name: 'boolean' },
+      control: 'boolean',
       description: 'Whether the input is disabled',
     },
     required: {
       type: { name: 'boolean' },
+      control: 'boolean',
       description: 'Whether the input is required',
     },
     readonly: {
       type: { name: 'boolean' },
+      control: 'boolean',
       description: 'Whether the input is readonly',
+    },
+    invalid: {
+      type: { name: 'boolean' },
+      control: 'boolean',
+      description: 'Whether the input value is invalid'
     },
   },
 };
@@ -59,10 +62,8 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     modelValue: '',
-    size: 'md',
     type: 'text',
     id: 'sd-base-input-default',
-    placeholder: 'Enter text',
     disabled: false,
     required: false,
     readonly: false,
@@ -87,25 +88,6 @@ export const Readonly: Story = {
   args: {
     ...Default.args,
     readonly: true,
-  },
-};
-
-export const Error: Story = {
-  args: {
-    ...Default.args,
-  },
-};
-
-export const WithLabel: Story = {
-  args: {
-    ...Default.args,
-  },
-};
-
-export const WithPlaceholder: Story = {
-  args: {
-    ...Default.args,
-    placeholder: 'Placeholder',
   },
 };
 
