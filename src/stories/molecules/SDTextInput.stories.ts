@@ -1,6 +1,6 @@
 import SDTextInput from '@/components/molecules/SDTextInput.vue';
-import type { Meta, StoryObj } from '@storybook/vue3-vite';
-
+import type { Meta, StoryContext, StoryObj } from '@storybook/vue3-vite';
+import { expect } from 'storybook/test';
 
 const meta: Meta<typeof SDTextInput> = {
   title: 'Molecules/SDTextInput',
@@ -70,10 +70,18 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Test: Story = {
   args: {
     label: 'Default',
+    id: 'test-story-id'
   },
+  play: async ({ canvas, userEvent }: StoryContext) => {
+    await userEvent.hover(canvas.getByLabelText('Default'));
+    await expect(canvas.getByLabelText('Default').parentElement?.classList).toContain('hover:ring-[1.5px]');
+
+    await userEvent.click(canvas.getByLabelText('Default'));
+    await expect(canvas.getByLabelText('Default').parentElement?.classList).toContain('focus-within:outline-2');
+  }
 };
 
 export const Small: Story = {

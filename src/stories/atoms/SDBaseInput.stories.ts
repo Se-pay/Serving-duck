@@ -27,6 +27,11 @@ const meta: Meta<typeof SDBaseInput> = {
       control: 'text',
       description: 'The name of the input',
     },
+    label: {
+      type: { name: 'string' },
+      control: 'text',
+      description: 'The label of the input, for aria-label',
+    },
     describedBy: {
       type: { name: 'string' },
       control: 'text',
@@ -64,6 +69,7 @@ export const Default: Story = {
     modelValue: '',
     type: 'text',
     id: 'sd-base-input-default',
+    label: 'sd-base-label',
     disabled: false,
     required: false,
     readonly: false,
@@ -94,6 +100,9 @@ export const Readonly: Story = {
 export const LightThemeVerification: Story = {
   globals: {
     theme: 'light',
+  },
+  args: {
+    ...Default.args,
   },
   render: (args: unknown) => ({
     components: { SDBaseInput },
