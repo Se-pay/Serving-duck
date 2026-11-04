@@ -1,3 +1,4 @@
+import { themes } from 'storybook/theming';
 import '../src/styles/style.css';
 
 import type { Decorator, Preview } from '@storybook/vue3-vite';
@@ -13,6 +14,20 @@ const withServingDuckTheme: Decorator = (
   const rawTheme: unknown = context.globals['theme'];
   const selectedTheme: TStoryTheme =
     rawTheme === 'light' || rawTheme === 'side-by-side' ? rawTheme : 'dark';
+
+  const htmlTag: HTMLElement = document.documentElement;
+  const bodyTag: HTMLElement = document.body;
+
+  if (selectedTheme !== 'side-by-side') {
+    htmlTag.setAttribute('data-theme', selectedTheme);
+    bodyTag.classList.add('bg-sd-canvas', 'text-sd-fg');
+    bodyTag.style.backgroundColor = ''; // Clear manual overrides
+  } else {
+    // For side-by-side, apply a neutral dark-gray behind the two cards
+    htmlTag.removeAttribute('data-theme');
+    bodyTag.classList.remove('bg-sd-canvas', 'text-sd-fg');
+    bodyTag.style.backgroundColor = '#1e293b'; // Tailwind slate-800
+  }
 
   if (selectedTheme === 'side-by-side') {
     return {
@@ -37,7 +52,9 @@ const withServingDuckTheme: Decorator = (
       return { selectedTheme };
     },
     template: `
-      <div :data-theme="selectedTheme" class="bg-sd-canvas text-sd-fg p-6 rounded-sd-md border border-sd-border">
+      <!-- Removed bg-sd-canvas here since the body tag now handles it,
+           leaving just your container styling -->
+      <div :data-theme="selectedTheme" class="p-6 rounded-sd-md border border-sd-border">
         <story />
       </div>
     `,
@@ -65,6 +82,8 @@ const preview: Preview = {
   },
   decorators: [withServingDuckTheme],
   parameters: {
+    // FIX: Disable the default backgrounds addon to prevent double toolbars
+    backgrounds: { disable: true },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -72,11 +91,24 @@ const preview: Preview = {
       },
     },
     a11y: {
-      // 'todo' - show a11y violations in the test UI only
-      // 'error' - fail CI on a11y violations
-      // 'off' - skip a11y checks entirely
       test: 'error',
     },
+    options: {
+      storySort: {
+        order: [
+          'Overview',
+          ['Welcome', 'Colors & Overrides'],
+          'Atoms',
+          'Molecules',
+          'Organisms',
+          'Templates',
+          'Pages',
+        ],
+      },
+    },
+    docs: {
+      theme: themes.dark
+    }
   },
 };
 

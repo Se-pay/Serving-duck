@@ -1,0 +1,127 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as WelcomeStories from './Welcome.stories';
+
+<Meta title="Overview/Welcome" />
+
+# Welcome to `@royal-duck/serving-duck`
+
+> **Zero-UI-dependency Vue 3 + Tailwind CSS v4 Atomic Design System** built for **Royal Duck** dashboards, operational SaaS applications, and HTML browser game menus & lobbies.
+
+---
+
+## Live Component Showcase
+
+Below is a live interactive preview composed with foundational Serving Duck components (`SDTitle`, `SDLabel`, semantic status indicators, and surfaces). Use the theme switcher in the Storybook toolbar at the top of the screen to switch between **Dark**, **Light**, and **Side-by-Side** mode in real time.
+
+<Canvas of={WelcomeStories.Showcase} />
+
+---
+
+## Key Highlights
+
+- ⚡ **Zero External UI Dependencies**: Pure Vue 3.5+ and standard CSS variables. No bulky runtime UI libraries.
+- 🎨 **Tailwind CSS v4 `@theme inline` Native**: Seamlessly shares semantic utility classes (`bg-sd-canvas`, `text-sd-fg`, `bg-sd-primary`, `rounded-sd-md`) with consumer applications.
+- 🌙 **Dark-First Architecture**: Precision-engineered for low-latency operational HUDs, telemetry displays, and command dashboards using rich Slate, Royal Indigo, and Royal Duck Gold tones.
+- ♿ **WCAG AA Calibrated**: Fully compliant foreground-to-background contrast ratios (≥ 4.5:1) in both dark and light modes, axe-core automated audit verified.
+- 🪟 **High Contrast Support**: Automatic translation to system colors under Windows High Contrast Mode (`@media (forced-colors: active)`).
+- 🧩 **Strict Atomic Hierarchy**: Organized cleanly according to Atomic Design methodology.
+
+---
+
+## Atomic Design Hierarchy
+
+`@royal-duck/serving-duck` organizes UI components into 5 distinct levels:
+
+```
+src/
+├── components/
+│   ├── atoms/       # Foundational primitives (SDTitle, SDLabel, buttons, inputs)
+│   ├── molecules/   # Simple composite groups (FormField, SearchBar, StatusBadge)
+│   ├── organisms/   # Complex feature sections (Navbar, Sidebar, TelemetryGrid)
+│   ├── templates/   # Layout structures and grid scaffoldings (DashboardLayout)
+│   └── pages/       # Complete view compositions (LobbyView, OverviewPage)
+```
+
+- **Atoms**: Smallest indivisible building blocks. They do not depend on other components.
+- **Molecules**: Small combinations of atoms acting together as a cohesive unit.
+- **Organisms**: Distinct functional sections that combine molecules and atoms.
+- **Templates**: Page-level wireframes focusing on structural relationships and responsive flow.
+- **Pages**: Concrete instances of templates populated with real data.
+
+---
+
+## Installation & Quick Start
+
+### 1. Install via npm
+
+```sh
+npm install @royal-duck/serving-duck
+```
+
+*Peer dependency: `vue@^3.5.0`.*
+
+### 2. Setup CSS & Themes
+
+#### Option A: Consuming App Uses Tailwind CSS v4 (Recommended)
+
+Import `@royal-duck/serving-duck/theme.css` immediately after `tailwindcss` in your root stylesheet. This grants your app access to all `*-sd-*` utility classes and automatically enables theme variables:
+
+```css
+@import "tailwindcss";
+@import "@royal-duck/serving-duck/theme.css";
+```
+
+#### Option B: Standalone Vue 3 App (Without Tailwind CSS)
+
+Import the pre-compiled stylesheet once in your app entrypoint:
+
+```ts
+import '@royal-duck/serving-duck/style.css';
+```
+
+### 3. Usage in Vue 3 Components
+
+#### Tree-Shakeable Named Imports (Recommended)
+
+Import only what you need to keep your production bundle minimal:
+
+```vue
+<script setup lang="ts">
+import { SDLabel, SDTitle } from '@royal-duck/serving-duck';
+</script>
+
+<template>
+  <div class="p-6 bg-sd-surface rounded-sd-lg border border-sd-border">
+    <SDTitle as="h2" size="lg" status="success">
+      Server Online
+    </SDTitle>
+
+    <SDLabel for="callsign" required>
+      Player Callsign
+    </SDLabel>
+  </div>
+</template>
+```
+
+#### Optional Global Plugin Registration
+
+```ts
+import { createApp } from 'vue';
+import { ServingDuck } from '@royal-duck/serving-duck';
+import '@royal-duck/serving-duck/style.css';
+
+import App from './App.vue';
+
+const app = createApp(App);
+app.use(ServingDuck);
+app.mount('#app');
+```
+
+---
+
+## Navigating This Storybook
+
+- **Theme Switcher**: In the top toolbar, click the theme icon to toggle between **Dark (Default)**, **Light**, and **Side by Side** mode.
+- **Colors & Overrides**: Visit the [Colors & Theme Overrides](?path=/docs/overview-colors-overrides--docs) page for token references, WCAG contrast details, and an interactive theme customizer.
+- **Accessibility Tab**: Every component includes automated **axe-core** accessibility checks in the **Accessibility** panel.
+- **Controls Panel**: Test component props, slots, sizes, and states interactively in the **Controls** panel.

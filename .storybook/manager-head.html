@@ -1,0 +1,30 @@
+<style>
+  :root {
+    color-scheme: dark;
+  }
+  /* Prevent the wrapper behind the iframe from flashing white */
+  #storybook-preview-wrapper,
+  #storybook-preview-iframe,
+  .sb-preview-wrapper,
+  iframe {
+    background-color: #020617 !important;
+    background: #020617 !important;
+    color-scheme: dark !important;
+  }
+  
+  /* Ensure the layout wrapper behind the iframe is also locked to your custom canvas color */
+  .sb-preview-wrapper,
+  .sb-main-padded {
+    background-color: #020617 !important;
+    background: #020617 !important;
+    color-scheme: dark !important;
+  }
+
+  .sb-preview-status,
+  .sb-loader,
+  .sb-errordisplay,
+  [data-is-loading="true"] {
+    background-color: #020617 !important;
+    color-scheme: dark !important;
+  }
+</style>
