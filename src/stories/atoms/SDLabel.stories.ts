@@ -8,27 +8,33 @@ const meta: Meta<typeof SDLabel> = {
   tags: ['autodocs'],
   argTypes: {
     label: {
+      type: { name: 'string' },
       control: 'text',
       description: 'Displayed label',
     },
     for: {
+      type: { name: 'string' },
       control: 'text',
       description: 'For input element',
     },
     size: {
+      type: { name: 'string' },
       control: 'select',
       options: ['xs', 'sm', 'md'],
       description: 'Size of the label',
     },
     required: {
+      type: { name: 'boolean' },
       control: 'boolean',
       description: 'Shows a star next to the label'
     },
     disabled: {
+      type: { name: 'boolean' },
       control: 'boolean',
       description: 'Shows the label as disabled'
     },
     uppercase: {
+      type: { name: 'boolean' },
       control: 'boolean',
       description: 'Toggle label beeing displayed as uppercase'
     },

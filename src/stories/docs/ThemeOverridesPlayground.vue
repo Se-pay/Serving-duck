@@ -115,7 +115,7 @@ const copyCss = async (): Promise<void> => {
     <div>
       <SDTitle
         as="h3"
-        size="lg"
+        size="md"
         status="accent"
         title="Interactive Color Override Playground"
       />
@@ -352,7 +352,7 @@ const copyCss = async (): Promise<void> => {
         >
           <button
             type="button"
-            class="px-4 py-2 text-sm font-semibold rounded-sd-md shadow-sm transition-transform active:scale-95 cursor-pointer text-white"
+            class="px-4 py-2 text-sm font-semibold rounded-sd-md shadow-sm transition-transform active:scale-95 cursor-pointer text-sd-primary-fg"
             style="background-color: var(--sd-primary);"
           >
             Primary Action

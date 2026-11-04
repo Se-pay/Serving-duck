@@ -21,8 +21,8 @@ import SDTitle from '@/components/atoms/SDTitle.vue';
         </span>
 
         <SDTitle
-          as="h2"
-          size="lg"
+          as="h3"
+          size="md"
           status="success"
           title="Command Deck 01"
         />

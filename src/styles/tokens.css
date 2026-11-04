@@ -24,17 +24,29 @@
   /* Brand Primary (Royal Indigo) & Accent (Royal Duck Gold) */
   --sd-primary: #6366f1;
   --sd-primary-hover: #818cf8;
-  --sd-primary-fg: #ffffff;
+  --sd-primary-focus: #a5b4fc;
+  --sd-primary-fg: #000000;
   --sd-accent: #fbbf24;
   --sd-accent-hover: #fcd34d;
+  --sd-accent-focus: #fde68a;
   --sd-accent-fg: #0f172a;
 
   /* Semantic Statuses */
   --sd-status-success: #34d399;
+  --sd-status-success-hover: #6ee7b7;
+  --sd-status-success-focus: #a7f3d0;
   --sd-status-warning: #fbbf24;
+  --sd-status-warning-hover: #fcd34d;
+  --sd-status-warning-focus: #fde68a;
   --sd-status-danger: #fb7185;
+  --sd-status-danger-hover: #fda4af;
+  --sd-status-danger-focus: #fecdd3;
   --sd-status-info: #38bdf8;
+  --sd-status-info-hover: #7dd3fc;
+  --sd-status-info-focus: #bae6fd;
   --sd-status-neutral: #94a3b8;
+  --sd-status-neutral-hover: #cbd5e1;
+  --sd-status-neutral-focus: #e2e8f0;
 
   /* Focus Ring */
   --sd-ring-focus: #818cf8;
@@ -75,17 +87,29 @@
   /* Brand Primary (Royal Indigo) & Accent (Royal Duck Gold) */
   --sd-primary: #4f46e5;
   --sd-primary-hover: #4338ca;
+  --sd-primary-focus: #3730a3;
   --sd-primary-fg: #ffffff;
   --sd-accent: #d97706;
   --sd-accent-hover: #b45309;
+  --sd-accent-focus: #92400e;
   --sd-accent-fg: #ffffff;
 
   /* Semantic Statuses (calibrated >= 4.5:1 on light surfaces) */
   --sd-status-success: #047857;
+  --sd-status-success-hover: #065f46;
+  --sd-status-success-focus: #064e3b;
   --sd-status-warning: #b45309;
+  --sd-status-warning-hover: #92400e;
+  --sd-status-warning-focus: #78350f;
   --sd-status-danger: #be123c;
+  --sd-status-danger-hover: #9f1239;
+  --sd-status-danger-focus: #881337;
   --sd-status-info: #0369a1;
+  --sd-status-info-hover: #075985;
+  --sd-status-info-focus: #0c4a6e;
   --sd-status-neutral: #475569;
+  --sd-status-neutral-hover: #334155;
+  --sd-status-neutral-focus: #1e293b;
 
   /* Focus Ring */
   --sd-ring-focus: #4f46e5;
@@ -111,15 +135,27 @@
     --sd-fg-disabled: GrayText;
     --sd-primary: Highlight;
     --sd-primary-hover: Highlight;
+    --sd-primary-focus: Highlight;
     --sd-primary-fg: HighlightText;
     --sd-accent: Highlight;
     --sd-accent-hover: Highlight;
+    --sd-accent-focus: Highlight;
     --sd-accent-fg: HighlightText;
     --sd-status-success: Highlight;
+    --sd-status-success-hover: Highlight;
+    --sd-status-success-focus: Highlight;
     --sd-status-warning: Highlight;
+    --sd-status-warning-hover: Highlight;
+    --sd-status-warning-focus: Highlight;
     --sd-status-danger: Mark;
+    --sd-status-danger-hover: Mark;
+    --sd-status-danger-focus: Highlight;
     --sd-status-info: Highlight;
+    --sd-status-info-hover: Highlight;
+    --sd-status-info-focus: Highlight;
     --sd-status-neutral: GrayText;
+    --sd-status-neutral-hover: ButtonText;
+    --sd-status-neutral-focus: Highlight;
     --sd-ring-focus: Highlight;
   }
 }

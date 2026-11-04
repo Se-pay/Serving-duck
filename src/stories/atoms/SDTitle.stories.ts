@@ -8,30 +8,36 @@ const meta: Meta<typeof SDTitle> = {
   tags: ['autodocs'],
   argTypes: {
     title: {
+      type: { name: 'string' },
       control: 'text',
       description: 'Displayed text',
     },
     size: {
+      type: { name: 'string' },
       control: 'select',
       options: ['sm', 'md', 'lg'],
       description: 'Size of the title',
     },
     fontWeight: {
+      type: { name: 'string' },
       control: 'select',
       options: ['normal', 'semibold', 'bold', 'bolder'],
       description: 'Font weight of the title',
     },
     as: {
+      type: { name: 'string' },
       control: 'select',
       options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
       description: 'Tag that is used for the title',
     },
     status: {
+      type: { name: 'string' },
       control: 'select',
       options: [undefined, 'success', 'warning', 'danger', 'info', 'neutral', 'primary', 'accent'],
       description: 'Status of the title (coloring)',
     },
     uppercase: {
+      type: { name: 'boolean' },
       control: 'boolean',
       description: 'Toggle uppercase'
     },
@@ -58,7 +64,7 @@ export const Primary: Story = {
 export const Small: Story = {
   args: {
     title: 'Telemetry Feed',
-    size: 'sm',
+    size: 'xs',
     as: 'h3',
   },
 };
@@ -66,7 +72,7 @@ export const Small: Story = {
 export const Medium: Story = {
   args: {
     title: 'Lobby Configuration',
-    size: 'md',
+    size: 'sm',
     as: 'h2',
   },
 };
@@ -74,7 +80,7 @@ export const Medium: Story = {
 export const Large: Story = {
   args: {
     title: 'Royal Duck Command',
-    size: 'lg',
+    size: 'md',
     as: 'h1',
   },
 };
