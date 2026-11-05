@@ -10,6 +10,7 @@ import {
   SDFormField,
   SDIcon,
   SDLabel,
+  SDEmailInput,
   SDTextInput,
   SDTitle,
   ServingDuck,
@@ -23,6 +24,7 @@ describe('ServingDuck entry & Vue plugin', (): void => {
     expect(SDIcon).toBeDefined();
     expect(SDLabel).toBeDefined();
     expect(SDTitle).toBeDefined();
+    expect(SDEmailInput).toBeDefined();
     expect(SDTextInput).toBeDefined();
 
     expect(SD_FORM_FIELD_KEY).toBeTypeOf('symbol');
@@ -47,6 +49,7 @@ describe('ServingDuck entry & Vue plugin', (): void => {
       'SDIcon',
       'SDLabel',
       'SDTitle',
+      'SDEmailInput',
       'SDTextInput',
     ];
 

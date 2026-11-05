@@ -38,7 +38,7 @@ const resolvedName: ComputedRef<string> = computed((): string =>
   resolveFormFieldValue<string>(props.name, fieldContext?.name, resolvedId.value),
 );
 const resolvedLabel: ComputedRef<string | undefined> = computed((): string | undefined =>
-  resolveFormFieldValue<string | undefined>(props.label, fieldContext?.label, undefined),
+  resolveFormFieldValue<string | undefined>(props.label, fieldContext?.label, resolvedName.value),
 );
 const resolvedDescribedBy: ComputedRef<string | undefined> = computed((): string | undefined =>
   resolveFormFieldValue<string | undefined>(props.describedBy, fieldContext?.describedBy, undefined),
@@ -59,10 +59,10 @@ const resolvedDisabled: ComputedRef<boolean> = computed((): boolean =>
 
 <template>
   <input
+    :id="resolvedId"
     v-model="value"
     class="outline-none bg-transparent w-full h-full"
     :type="type"
-    :id="resolvedId"
     :name="resolvedName"
     :required="resolvedRequired"
     :readonly="resolvedReadonly"

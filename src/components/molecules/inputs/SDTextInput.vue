@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import type { TSDMediumSize, TSDStatus } from '@/types/common.ts';
-import { getSizeClasses, getStatusClasses } from '@/utils/variantStyling.ts';
 import { computed, ref, useId, type ComputedRef, type ModelRef, type Ref } from 'vue';
-import SDBaseInput from '../atoms/SDBaseInput.vue';
-import SDErrorMessage from '../atoms/SDErrorMessage.vue';
-import SDFormField from '../atoms/SDFormField.vue';
-import SDIcon from '../atoms/SDIcon.vue';
-import SDLabel from '../atoms/SDLabel.vue';
+import type { TSDMediumSize, TSDStatus } from '../../../types/common.ts';
+import { getSizeClasses, getStatusClasses } from '../../../utils/variantStyling.ts';
+import SDBaseInput from '../../atoms/SDBaseInput.vue';
+import SDErrorMessage from '../../atoms/SDErrorMessage.vue';
+import SDFormField from '../../atoms/SDFormField.vue';
+import SDIcon from '../../atoms/SDIcon.vue';
+import SDLabel from '../../atoms/SDLabel.vue';
 
 export interface ISDTextInputProps {
   modelValue: string | undefined | null;
@@ -99,10 +99,10 @@ const resolvedStatus: ComputedRef<TSDStatus> = computed(() => {
 
       <!-- Error Icon -->
       <SDIcon
+        v-if="invalid"
         name="x-circle"
         :status="resolvedStatus"
         :size="size"
-        v-if="invalid"
       >
         <slot name="errorIcon"></slot>
       </SDIcon>

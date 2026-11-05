@@ -1,7 +1,7 @@
 import type { App, Plugin } from 'vue';
 
 import { SDBaseInput, SDFormField, SDIcon, SDLabel, SDTitle } from './components/atoms';
-import { SDPasswordInput, SDTextInput } from './components/molecules';
+import { SDEmailInput, SDPasswordInput, SDTextInput } from './components/molecules';
 
 export * from './components/atoms';
 export * from './components/molecules';
@@ -17,6 +17,13 @@ export {
   SD_ICONS,
   type TSDIconName
 } from './utils/icons';
+export {
+  DEFAULT_EMAIL_REGEX, validateEmail, type ISDEmailValidationOptions,
+  type ISDEmailValidationResult,
+  type ISDVuelidateField,
+  type TSDEmailValidator,
+  type TSDEmailValidatorFn
+} from './utils/validation';
 
 export const ServingDuck: Plugin = {
   install(app: App): void {
@@ -28,6 +35,7 @@ export const ServingDuck: Plugin = {
     app.component('SDLabel', SDLabel);
 
     // molecules
+    app.component('SDEmailInput', SDEmailInput);
     app.component('SDPasswordInput', SDPasswordInput);
     app.component('SDTextInput', SDTextInput);
   },
@@ -43,6 +51,7 @@ declare module 'vue' {
     SDTitle: typeof SDTitle;
 
     // molecules
+    SDEmailInput: typeof SDEmailInput;
     SDPasswordInput: typeof SDPasswordInput;
     SDTextInput: typeof SDTextInput;
   }
