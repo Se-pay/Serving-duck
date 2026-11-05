@@ -1,9 +1,9 @@
-import SDPasswordInput from '@/components/molecules/SDPasswordInput.vue';
+import SDPasswordInput from '@/components/molecules/inputs/SDPasswordInput.vue';
 import type { Meta, StoryContext, StoryObj } from '@storybook/vue3-vite';
 import { expect } from 'storybook/test';
 
 const meta: Meta<typeof SDPasswordInput> = {
-  title: 'Molecules/SDPasswordInput',
+  title: 'Molecules/Inputs/SDPasswordInput',
   component: SDPasswordInput,
   tags: ['autodocs'],
   argTypes: {
@@ -64,7 +64,7 @@ const meta: Meta<typeof SDPasswordInput> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const test: Story = {
+export const InteractiveTest: Story = {
   args: {
     label: 'Default',
     id: 'test-password-id'
@@ -78,15 +78,15 @@ export const test: Story = {
 
     await userEvent.type(canvas.getByLabelText('Default'), 'Test123!');
     await expect(canvas.getByTestId('password-eye-icon')).toHaveAttribute('aria-controls', 'test-password-id');
-    await expect(canvas.getByTestId('password-eye-icon')).toHaveAttribute('aria-expanded', 'false');
+    await expect(canvas.getByTestId('password-eye-icon')).toHaveAttribute('aria-pressed', 'false');
     await expect(canvas.getByLabelText('Default')).toHaveAttribute('type', 'password');
 
     await userEvent.click(canvas.getByTestId('password-eye-icon'));
-    await expect(canvas.getByTestId('password-eye-icon')).toHaveAttribute('aria-expanded', 'true');
+    await expect(canvas.getByTestId('password-eye-icon')).toHaveAttribute('aria-pressed', 'true');
     await expect(canvas.getByLabelText('Default')).toHaveAttribute('type', 'text');
 
     await userEvent.click(canvas.getByTestId('password-eye-icon'));
-    await expect(canvas.getByTestId('password-eye-icon')).toHaveAttribute('aria-expanded', 'false');
+    await expect(canvas.getByTestId('password-eye-icon')).toHaveAttribute('aria-pressed', 'false');
     await expect(canvas.getByLabelText('Default')).toHaveAttribute('type', 'password');
   }
 };

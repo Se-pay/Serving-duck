@@ -4,11 +4,11 @@ export {
   type ISDEmailInputProps
 } from './inputs/SDEmailInput.vue';
 export {
+  default as SDPasswordInput,
+  type ISDPasswordInputProps
+} from './inputs/SDPasswordInput.vue';
+export {
   default as SDTextInput,
   type ISDTextInputProps
 } from './inputs/SDTextInput.vue';
-export {
-  default as SDPasswordInput,
-  type ISDPasswordInputProps
-} from './SDPasswordInput.vue';
 

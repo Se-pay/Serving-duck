@@ -1,6 +1,6 @@
 import type { App, Plugin } from 'vue';
 
-import { SDBaseInput, SDFormField, SDIcon, SDLabel, SDTitle } from './components/atoms';
+import { SDBaseInput, SDErrorMessage, SDFormField, SDIcon, SDLabel, SDTitle } from './components/atoms';
 import { SDEmailInput, SDPasswordInput, SDTextInput } from './components/molecules';
 
 export * from './components/atoms';
@@ -29,6 +29,7 @@ export const ServingDuck: Plugin = {
   install(app: App): void {
     // atoms
     app.component('SDBaseInput', SDBaseInput);
+    app.component('SDErrorMessage', SDErrorMessage);
     app.component('SDFormField', SDFormField);
     app.component('SDIcon', SDIcon);
     app.component('SDTitle', SDTitle);
@@ -45,6 +46,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     // atoms
     SDBaseInput: typeof SDBaseInput;
+    SDErrorMessage: typeof SDErrorMessage;
     SDFormField: typeof SDFormField;
     SDIcon: typeof SDIcon;
     SDLabel: typeof SDLabel;

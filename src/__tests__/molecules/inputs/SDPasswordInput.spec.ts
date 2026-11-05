@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 import SDIcon from '@/components/atoms/SDIcon.vue';
 import SDLabel from '@/components/atoms/SDLabel.vue';
-import SDPasswordInput from '@/components/molecules/SDPasswordInput.vue';
+import SDPasswordInput from '@/components/molecules/inputs/SDPasswordInput.vue';
 import type { TSDMediumSize, TSDStatus } from '@/types/common';
 import { SD_ICONS } from '@/utils/icons';
 
@@ -33,7 +33,7 @@ describe('SDPasswordInput', (): void => {
     const eyeButton: ReturnType<VueWrapper['find']> = wrapper.find('[data-testid="password-eye-icon"]');
     expect(eyeButton.exists()).toBe(true);
     expect(eyeButton.attributes('role')).toBe('button');
-    expect(eyeButton.attributes('aria-expanded')).toBe('false');
+    expect(eyeButton.attributes('aria-pressed')).toBe('false');
     expect(eyeButton.attributes('aria-controls')).toBe(input.attributes('id'));
 
     const eyePaths: ReturnType<VueWrapper['findAll']> = eyeButton.findAll('svg > path');
@@ -61,7 +61,7 @@ describe('SDPasswordInput', (): void => {
     expect(emitted['update:modelValue']?.[0]).toEqual(['Secret!987']);
   });
 
-  it('toggles password visibility and updates input type, aria-expanded, and eye icon on click', async (): Promise<void> => {
+  it('toggles password visibility and updates input type, aria-pressed, and eye icon on click', async (): Promise<void> => {
     const wrapper: VueWrapper = mount(SDPasswordInput, {
       props: {
         modelValue: 'SuperSecret',
@@ -73,21 +73,21 @@ describe('SDPasswordInput', (): void => {
     const eyeButton: ReturnType<VueWrapper['find']> = wrapper.find('[data-testid="password-eye-icon"]');
 
     expect(input.attributes('type')).toBe('password');
-    expect(eyeButton.attributes('aria-expanded')).toBe('false');
+    expect(eyeButton.attributes('aria-pressed')).toBe('false');
     expect(eyeButton.findAll('svg > path')).toHaveLength(SD_ICONS.eye.length);
 
     // Toggle to visible (text)
     await eyeButton.trigger('click');
 
     expect(input.attributes('type')).toBe('text');
-    expect(eyeButton.attributes('aria-expanded')).toBe('true');
+    expect(eyeButton.attributes('aria-pressed')).toBe('true');
     expect(eyeButton.findAll('svg > path')).toHaveLength(SD_ICONS['eye-off'].length);
 
     // Toggle back to hidden (password)
     await eyeButton.trigger('click');
 
     expect(input.attributes('type')).toBe('password');
-    expect(eyeButton.attributes('aria-expanded')).toBe('false');
+    expect(eyeButton.attributes('aria-pressed')).toBe('false');
     expect(eyeButton.findAll('svg > path')).toHaveLength(SD_ICONS.eye.length);
   });
 
@@ -170,7 +170,18 @@ describe('SDPasswordInput', (): void => {
         invalid: true,
       },
     });
-    expect(invalidWrapper.find('input').attributes('aria-describedby')).toBe('my-input-error');
+    expect(invalidWrapper.find('input').attributes('aria-describedby')).toBe('pwd-hints');
+
+    const invalidWrapperError: VueWrapper = mount(SDPasswordInput, {
+      props: {
+        modelValue: '',
+        id: 'my-input',
+        describedBy: 'pwd-hints',
+        invalid: true,
+        errorMessage: 'Invalid password'
+      },
+    });
+    expect(invalidWrapperError.find('input').attributes('aria-describedby')).toBe('my-input-error pwd-hints');
   });
 
   it('forwards fallthrough attributes and DOM event listeners to the inner input rather than outer wrapper', async (): Promise<void> => {

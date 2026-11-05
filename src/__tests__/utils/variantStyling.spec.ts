@@ -15,17 +15,7 @@ describe('variantStyling utilities', (): void => {
       'accent',
     ];
 
-    it('returns semantic background and text classes for every status', (): void => {
-      const expectedBg: Record<TSDStatus, string> = {
-        success: 'bg-sd-status-success',
-        warning: 'bg-sd-status-warning',
-        danger: 'bg-sd-status-danger',
-        info: 'bg-sd-status-info',
-        neutral: 'bg-sd-status-neutral',
-        primary: 'bg-sd-primary',
-        accent: 'bg-sd-accent',
-      };
-
+    it('returns semantic text classes for every status', (): void => {
       const expectedText: Record<TSDStatus, string> = {
         success: 'text-sd-status-success',
         warning: 'text-sd-status-warning',
@@ -37,12 +27,19 @@ describe('variantStyling utilities', (): void => {
       };
 
       for (const status of statuses) {
-        expect(getStatusClasses(status, 'bg')).toBe(expectedBg[status]);
         expect(getStatusClasses(status, 'text')).toBe(expectedText[status]);
       }
     });
 
-    it('returns prefixed border, hover, and focus classes for every status', (): void => {
+    it('returns background classes for every status with hover and focus', (): void =>  {
+      for (const status of statuses) {
+        expect(getStatusClasses(status, 'bg', {hover: true, focus: false})).toBe(status !== 'primary' && status !== 'accent' ? `bg-sd-status-${status} hover:bg-sd-status-${status}-hover` : `bg-sd-${status} hover:bg-sd-${status}-hover`);
+        expect(getStatusClasses(status, 'bg', {hover: false, focus: true})).toBe(status !== 'primary' && status !== 'accent' ? `bg-sd-status-${status} focus:bg-sd-status-${status}-focus` : `bg-sd-${status} focus:bg-sd-${status}-focus`);
+        expect(getStatusClasses(status, 'bg', {hover: true, focus: true})).toBe(status !== 'primary' && status !== 'accent' ? `bg-sd-status-${status} hover:bg-sd-status-${status}-hover focus:bg-sd-status-${status}-focus` : `bg-sd-${status} hover:bg-sd-${status}-hover focus:bg-sd-${status}-focus`);
+      }
+    });
+
+    it('returns prefixed border classes for every status with hover and focus', (): void => {
       for (const status of statuses) {
         const borderClasses: string = getStatusClasses(status, 'border');
         expect(borderClasses.startsWith('border ')).toBe(true);
@@ -52,22 +49,22 @@ describe('variantStyling utilities', (): void => {
             : `border-sd-status-${status}`,
         );
 
-        const hoverClasses: string = getStatusClasses(status, 'hover');
-        expect(hoverClasses.startsWith('hover:ring-[1.5px] ')).toBe(true);
+        const hoverClasses: string = getStatusClasses(status, 'border', {hover: true});
+        expect(hoverClasses).toContain('hover:ring-[1.5px]');
         expect(hoverClasses).toContain(
           status === 'primary' || status === 'accent'
             ? `hover:border-sd-${status}-hover`
             : `hover:border-sd-status-${status}-hover`,
         );
 
-        const focusClasses: string = getStatusClasses(status, 'focus');
-        expect(focusClasses.startsWith('focus-within:outline-2 focus-within:-outline-offset-1 ')).toBe(true);
+        const focusClasses: string = getStatusClasses(status, 'border', {focus: true});
+        expect(focusClasses).toContain('focus-within:outline-2 focus-within:-outline-offset-1');
       }
 
       // Neutral focus intentionally uses primary focus ring & border tokens
-      expect(getStatusClasses('neutral', 'focus')).toContain('focus-visible:outline-sd-primary-focus');
-      expect(getStatusClasses('neutral', 'focus')).toContain('focus-within:border-sd-primary-focus');
-      expect(getStatusClasses('danger', 'focus')).toContain('focus-within:outline-sd-status-danger-focus');
+      expect(getStatusClasses('neutral', 'border', {focus: true})).toContain('focus-visible:outline-sd-primary-focus');
+      expect(getStatusClasses('neutral', 'border', {focus: true})).toContain('focus-within:border-sd-primary-focus');
+      expect(getStatusClasses('danger', 'border', {focus: true})).toContain('focus-within:outline-sd-status-danger-focus');
     });
 
     it('returns an empty string for an unsupported runtime variant', (): void => {

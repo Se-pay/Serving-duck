@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import { getStatusClasses } from '@/utils/variantStyling';
+import { computed, useSlots, type ComputedRef, type Slots } from 'vue';
+import { getStatusClasses } from '../../utils/variantStyling';
 
 export interface ISDErrorMessageProps {
   invalid?: boolean;
@@ -7,18 +8,25 @@ export interface ISDErrorMessageProps {
   errorId?: string;
 }
 
-withDefaults(defineProps<ISDErrorMessageProps>(), {
+const slots: Slots = useSlots();
+const props: ISDErrorMessageProps = withDefaults(defineProps<ISDErrorMessageProps>(), {
   invalid: false,
   errorMessage: '',
   errorId: '',
 });
 
+const isErrorMessageVisible: ComputedRef<boolean> = computed((): boolean => {
+  return Boolean(
+    props.invalid &&
+    (props.errorMessage || !!slots['default']),
+  );
+});
 </script>
 
 <template>
   <div
-    v-if="invalid && (errorMessage || $slots['default'])"
-    :id="errorId"
+    v-if="isErrorMessageVisible"
+    :id="errorId || undefined"
     class="text-xs tracking-wider"
     :class="[
       getStatusClasses('danger', 'text')
