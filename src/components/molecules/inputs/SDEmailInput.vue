@@ -1,27 +1,21 @@
 <script lang="ts" setup>
-import SDBaseInput from '../../atoms/SDBaseInput.vue';
-import SDFormField from '../../atoms/SDFormField.vue';
-import SDIcon from '../../atoms/SDIcon.vue';
-import SDLabel from '../../atoms/SDLabel.vue';
-import type { TSDMediumSize, TSDStatus } from '../../../types/common';
-import {
-  type ISDEmailValidationResult,
-  type TSDEmailValidator,
-  validateEmail,
-} from '../../../utils/validation';
-import { getSizeClasses, getStatusClasses } from '../../../utils/variantStyling';
 import {
   computed,
   getCurrentInstance,
   ref,
   useId,
-  useSlots,
   watch,
   type ComputedRef,
   type ModelRef,
-  type Ref,
-  type Slots,
+  type Ref
 } from 'vue';
+import type { TSDMediumSize, TSDStatus } from '../../../types/common';
+import {
+  validateEmail,
+  type ISDEmailValidationResult,
+  type TSDEmailValidator,
+} from '../../../utils/validation';
+import SDTextInput from './SDTextInput.vue';
 
 export interface ISDEmailInputProps {
   modelValue?: string | undefined | null;
@@ -42,8 +36,6 @@ export interface ISDEmailInputProps {
   disableValidation?: boolean;
   validateOn?: 'blur' | 'input';
 }
-
-defineOptions({ inheritAttrs: false });
 
 const props: ISDEmailInputProps = withDefaults(defineProps<ISDEmailInputProps>(), {
   id: undefined,
@@ -73,7 +65,6 @@ const invalidModel: ModelRef<boolean | undefined> = defineModel<boolean | undefi
 
 const hasBlurred: Ref<boolean> = ref(false);
 
-const slots: Slots = useSlots();
 const instance: ReturnType<typeof getCurrentInstance> = getCurrentInstance();
 
 const hasUpdateInvalidListener: boolean =
@@ -143,36 +134,6 @@ const resolvedErrorMessage: ComputedRef<string | undefined> = computed((): strin
 
 const fallbackId: string = useId();
 const resolvedId: ComputedRef<string> = computed((): string => props.id ?? fallbackId);
-const errorId: ComputedRef<string> = computed((): string => `${resolvedId.value}-error`);
-
-const isErrorMessageVisible: ComputedRef<boolean> = computed((): boolean => {
-  return Boolean(
-    resolvedInvalid.value &&
-    (resolvedErrorMessage.value || slots.errorMessage),
-  );
-});
-
-const resolvedDescribedBy: ComputedRef<string | undefined> = computed((): string | undefined => {
-  const ids: string[] = [];
-
-  if (isErrorMessageVisible.value) {
-    ids.push(errorId.value);
-  }
-
-  if (props.describedBy) {
-    ids.push(props.describedBy);
-  }
-
-  return ids.length > 0 ? ids.join(' ') : undefined;
-});
-
-const resolvedStatus: ComputedRef<TSDStatus> = computed((): TSDStatus => {
-  if (resolvedInvalid.value) {
-    return 'danger';
-  }
-
-  return props.status ?? 'neutral';
-});
 
 const touchExternalValidator = (): void => {
   if (
@@ -210,72 +171,47 @@ defineExpose({
 </script>
 
 <template>
-  <SDFormField
+  <SDTextInput
     :id="resolvedId"
+    v-model="value"
+    type="email"
     :name="name"
     :label="label"
-    :described-by="resolvedDescribedBy"
+    :described-by="describedBy"
     :required="required"
     :readonly="readonly"
     :disabled="disabled"
     :invalid="resolvedInvalid"
-    :class="containerClass"
+    :size="size"
+    :status="status"
+    :error-message="resolvedErrorMessage"
+    :container-class="containerClass"
+    :uppercase="uppercase"
+    @blur="handleBlur"
   >
-    <SDLabel
-      v-if="label"
-      size="xs"
-      :uppercase="uppercase"
+    <template
+      v-if="$slots.errorIcon"
+      #errorIcon
     >
-      {{ label }}
-    </SDLabel>
-
-    <div
-      class="w-full bg-sd-surface rounded-lg transition flex gap-1 items-center"
-      :class="[
-        disabled ? 'text-sd-fg-disabled opacity-50 cursor-not-allowed' : 'text-sd-fg-muted',
-        getSizeClasses(size ?? 'md', 'p'),
-        getSizeClasses(size ?? 'md', 'text'),
-        getStatusClasses(resolvedStatus, 'border'),
-        !disabled && getStatusClasses(resolvedStatus, 'focus'),
-        !disabled && getStatusClasses(resolvedStatus, 'hover'),
-      ]"
+      <slot name="errorIcon"></slot>
+    </template>
+    <template
+      v-if="$slots.errorMessage"
+      #errorMessage
     >
-      <!-- prefix placeholder (icons, units, etc.) -->
+      <slot name="errorMessage"></slot>
+    </template>
+    <template
+      v-if="$slots.prefix"
+      #prefix
+    >
       <slot name="prefix"></slot>
-
-      <SDBaseInput
-        v-bind="$attrs"
-        v-model="value"
-        type="email"
-        @blur="handleBlur"
-      />
-
-      <!-- suffix placeholder (icons, units, etc.) -->
-      <slot name="suffix"></slot>
-
-      <!-- Error Icon -->
-      <SDIcon
-        v-if="resolvedInvalid"
-        name="x-circle"
-        :status="resolvedStatus"
-        :size="size"
-      >
-        <slot name="errorIcon"></slot>
-      </SDIcon>
-    </div>
-
-    <!-- error-message -->
-    <div
-      v-if="isErrorMessageVisible"
-      :id="errorId"
-      class="text-xs tracking-wider"
-      :class="[
-        getStatusClasses(resolvedStatus, 'text'),
-      ]"
-      role="alert"
-      aria-live="polite"
+    </template>
+    <template
+      v-if="$slots.suffix"
+      #suffix
     >
-      <slot name="errorMessage">{{ resolvedErrorMessage }}</slot>
-    </div>
-  </SDFormField>
+      <slot name="suffix"></slot>
+    </template>
+  </SDTextInput>
 </template>

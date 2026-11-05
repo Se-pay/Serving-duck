@@ -7,10 +7,10 @@ import {
   SD_ICON_NAMES,
   SD_ICONS,
   SDBaseInput,
+  SDEmailInput,
   SDFormField,
   SDIcon,
   SDLabel,
-  SDEmailInput,
   SDTextInput,
   SDTitle,
   ServingDuck,
@@ -45,11 +45,13 @@ describe('ServingDuck entry & Vue plugin', (): void => {
 
     const expectedComponents: string[] = [
       'SDBaseInput',
+      'SDErrorMessage',
       'SDFormField',
       'SDIcon',
       'SDLabel',
       'SDTitle',
       'SDEmailInput',
+      'SDPasswordInput',
       'SDTextInput',
     ];
 

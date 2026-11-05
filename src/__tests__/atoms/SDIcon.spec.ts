@@ -9,7 +9,7 @@ describe('SDIcon', (): void => {
   it('renders a decorative inline-flex span with md and neutral defaults', (): void => {
     const wrapper: VueWrapper = mount(SDIcon, {
       props: {
-        name: 'check',
+        icon: 'check',
       },
     });
 
@@ -32,19 +32,19 @@ describe('SDIcon', (): void => {
     for (const iconName of SD_ICON_NAMES) {
       const wrapper: VueWrapper = mount(SDIcon, {
         props: {
-          name: iconName,
+          icon: iconName,
         },
       });
 
       const paths: ReturnType<VueWrapper['findAll']> = wrapper.findAll('svg > path');
-      expect(paths).toHaveLength(SD_ICONS[iconName].length);
+      expect(paths, `${iconName} should have ${SD_ICONS[iconName].length} paths`).toHaveLength(SD_ICONS[iconName].length);
     }
   });
 
-  it('prefers default slot content over the built-in name prop', (): void => {
+  it('prefers default slot content over the built-in icon prop', (): void => {
     const wrapper: VueWrapper = mount(SDIcon, {
       props: {
-        name: 'check',
+        icon: 'check',
       },
       slots: {
         default: '<svg data-testid="custom-svg" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" /></svg>',
@@ -55,7 +55,7 @@ describe('SDIcon', (): void => {
     expect(wrapper.findAll('path')).toHaveLength(0);
   });
 
-  it('renders an empty wrapper cleanly when name is omitted or unrecognized at runtime', (): void => {
+  it('renders an empty wrapper cleanly when icon is omitted or unrecognized at runtime', (): void => {
     const emptyWrapper: VueWrapper = mount(SDIcon);
     expect(emptyWrapper.find('svg').exists()).toBe(false);
     expect(emptyWrapper.attributes('aria-hidden')).toBe('true');
@@ -63,7 +63,7 @@ describe('SDIcon', (): void => {
     const unknownName: TSDIconName = 'non-existent-icon' as unknown as TSDIconName;
     const unknownWrapper: VueWrapper = mount(SDIcon, {
       props: {
-        name: unknownName,
+        icon: unknownName,
       },
     });
     expect(unknownWrapper.find('svg').exists()).toBe(false);
@@ -72,7 +72,7 @@ describe('SDIcon', (): void => {
   it('exposes role="img" and trimmed aria-label when a non-empty label prop is set', (): void => {
     const informativeWrapper: VueWrapper = mount(SDIcon, {
       props: {
-        name: 'x-circle',
+        icon: 'x-circle',
         status: 'danger',
         label: '  Connection failed  ',
       },
@@ -84,7 +84,7 @@ describe('SDIcon', (): void => {
 
     const blankLabelWrapper: VueWrapper = mount(SDIcon, {
       props: {
-        name: 'info',
+        icon: 'info',
         label: '   ',
       },
     });
@@ -107,7 +107,7 @@ describe('SDIcon', (): void => {
     for (const size of sizes) {
       const wrapper: VueWrapper = mount(SDIcon, {
         props: {
-          name: 'info',
+          icon: 'info',
           size,
         },
       });
@@ -128,7 +128,7 @@ describe('SDIcon', (): void => {
     for (const status of statuses) {
       const wrapper: VueWrapper = mount(SDIcon, {
         props: {
-          name: 'info',
+          icon: 'info',
           status,
         },
       });

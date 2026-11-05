@@ -8,7 +8,7 @@ const meta: Meta<typeof SDIcon> = {
   component: SDIcon,
   tags: ['autodocs'],
   argTypes: {
-    name: {
+    icon: {
       type: { name: 'string' },
       control: 'select',
       options: [undefined, ...SD_ICON_NAMES],
@@ -33,7 +33,7 @@ const meta: Meta<typeof SDIcon> = {
     },
   },
   args: {
-    name: 'check-circle',
+    icon: 'check-circle',
     size: 'md',
     status: 'neutral',
     label: undefined,
@@ -45,7 +45,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    name: 'check-circle',
+    icon: 'check-circle',
     status: 'success',
   },
 };
@@ -63,7 +63,7 @@ export const IconGallery: Story = {
           :key="iconName"
           class="flex flex-col items-center justify-center gap-2 p-3 rounded-sd-md bg-sd-surface border border-sd-border-subtle text-sd-fg"
         >
-          <SDIcon :name="iconName" size="lg" status="primary" />
+          <SDIcon :icon="iconName" size="lg" status="primary" />
           <span class="font-sd-mono text-xs text-sd-fg-muted">{{ iconName }}</span>
         </div>
       </div>
@@ -76,11 +76,11 @@ export const Sizes: Story = {
     components: { SDIcon },
     template: `
       <div class="flex items-center gap-4">
-        <SDIcon name="settings" size="xs" status="primary" />
-        <SDIcon name="settings" size="sm" status="primary" />
-        <SDIcon name="settings" size="md" status="primary" />
-        <SDIcon name="settings" size="lg" status="primary" />
-        <SDIcon name="settings" size="xl" status="primary" />
+        <SDIcon icon="settings" size="xs" status="primary" />
+        <SDIcon icon="settings" size="sm" status="primary" />
+        <SDIcon icon="settings" size="md" status="primary" />
+        <SDIcon icon="settings" size="lg" status="primary" />
+        <SDIcon icon="settings" size="xl" status="primary" />
       </div>
     `,
   }),
@@ -91,13 +91,13 @@ export const Statuses: Story = {
     components: { SDIcon },
     template: `
       <div class="flex flex-wrap items-center gap-4">
-        <SDIcon name="check-circle" size="lg" status="success" label="Server online" />
-        <SDIcon name="warning" size="lg" status="warning" label="High latency" />
-        <SDIcon name="x-circle" size="lg" status="danger" label="Connection lost" />
-        <SDIcon name="info" size="lg" status="info" label="Patch available" />
-        <SDIcon name="settings" size="lg" status="neutral" label="Idle state" />
-        <SDIcon name="user" size="lg" status="primary" label="Active player" />
-        <SDIcon name="lock" size="lg" status="accent" label="Ranked lobby" />
+        <SDIcon icon="check-circle" size="lg" status="success" label="Server online" />
+        <SDIcon icon="warning" size="lg" status="warning" label="High latency" />
+        <SDIcon icon="x-circle" size="lg" status="danger" label="Connection lost" />
+        <SDIcon icon="info" size="lg" status="info" label="Patch available" />
+        <SDIcon icon="settings" size="lg" status="neutral" label="Idle state" />
+        <SDIcon icon="user" size="lg" status="primary" label="Active player" />
+        <SDIcon icon="lock" size="lg" status="accent" label="Ranked lobby" />
       </div>
     `,
   }),
@@ -127,13 +127,13 @@ export const LightThemeVerification: Story = {
     components: { SDIcon },
     template: `
       <div class="flex items-center gap-4">
-        <SDIcon name="check-circle" size="lg" status="success" label="Healthy" />
-        <SDIcon name="warning" size="lg" status="warning" label="Degraded" />
-        <SDIcon name="x-circle" size="lg" status="danger" label="Offline" />
-        <SDIcon name="info" size="lg" status="info" label="Notice" />
-        <SDIcon name="search" size="lg" status="neutral" label="Search" />
-        <SDIcon name="user" size="lg" status="primary" label="Player" />
-        <SDIcon name="lock" size="lg" status="accent" label="VIP" />
+        <SDIcon icon="check-circle" size="lg" status="success" label="Healthy" />
+        <SDIcon icon="warning" size="lg" status="warning" label="Degraded" />
+        <SDIcon icon="x-circle" size="lg" status="danger" label="Offline" />
+        <SDIcon icon="info" size="lg" status="info" label="Notice" />
+        <SDIcon icon="search" size="lg" status="neutral" label="Search" />
+        <SDIcon icon="user" size="lg" status="primary" label="Player" />
+        <SDIcon icon="lock" size="lg" status="accent" label="VIP" />
       </div>
     `,
   }),

@@ -199,16 +199,6 @@ describe('SDTextInput', (): void => {
   });
 
   it('renders error icon and errorMessage only when invalid, and supports errorIcon / errorMessage slots', (): void => {
-    const validWithErrorProp: VueWrapper = mount(SDTextInput, {
-      props: {
-        modelValue: 'ok',
-        invalid: false,
-        errorMessage: 'Should stay hidden',
-      },
-    });
-    expect(validWithErrorProp.findComponent(SDIcon).exists()).toBe(false);
-    expect(validWithErrorProp.text()).not.toContain('Should stay hidden');
-
     const invalidWithoutMessage: VueWrapper = mount(SDTextInput, {
       props: {
         modelValue: 'bad',
@@ -218,6 +208,16 @@ describe('SDTextInput', (): void => {
     expect(invalidWithoutMessage.findComponent(SDIcon).exists()).toBe(true);
     expect(invalidWithoutMessage.findComponent(SDIcon).classes()).toContain('text-sd-status-danger');
     expect(invalidWithoutMessage.find('.text-xs.tracking-wider').exists()).toBe(false);
+
+    const validWithErrorProp: VueWrapper = mount(SDTextInput, {
+      props: {
+        modelValue: 'ok',
+        invalid: false,
+        errorMessage: 'Should stay hidden',
+      },
+    });
+    expect(validWithErrorProp.findComponent(SDIcon).exists()).toBe(false);
+    expect(validWithErrorProp.text()).not.toContain('Should stay hidden');
 
     const invalidWithMessage: VueWrapper = mount(SDTextInput, {
       props: {

@@ -12,6 +12,12 @@ const meta: Meta<typeof SDTextInput> = {
       control: 'text',
       description: 'The v-model binding for the input',
     },
+    type: {
+      type: { name: 'string'  },
+      control: 'select',
+      options: ['text', 'password', 'email'],
+      description: 'The type of the input field'
+    },
     label: {
       type: { name: 'string' },
       control: 'text',
@@ -70,10 +76,9 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Test: Story = {
+export const InteractiveTest: Story = {
   args: {
     label: 'Default',
-    id: 'test-story-id'
   },
   play: async ({ canvas, userEvent }: StoryContext) => {
     await userEvent.hover(canvas.getByLabelText('Default'));

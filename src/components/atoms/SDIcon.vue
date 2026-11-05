@@ -6,14 +6,14 @@ import { SD_ICONS, type TSDIconName } from '../../utils/icons';
 import { getSizeClasses, getStatusClasses } from '../../utils/variantStyling';
 
 export interface ISDIconProps {
-  name?: TSDIconName;
+  icon?: TSDIconName;
   status?: TSDStatus;
   size?: TSDSize;
   label?: string;
 }
 
 const props: ISDIconProps = withDefaults(defineProps<ISDIconProps>(), {
-  name: undefined,
+  icon: undefined,
   status: 'neutral',
   size: 'md',
   label: undefined,
@@ -27,11 +27,11 @@ const normalizedLabel: ComputedRef<string | undefined> = computed((): string | u
 const isDecorative: ComputedRef<boolean> = computed((): boolean => !normalizedLabel.value);
 
 const resolvedPaths: ComputedRef<readonly string[]> = computed((): readonly string[] => {
-  if (!props.name) {
+  if (!props.icon) {
     return [];
   }
 
-  return SD_ICONS[props.name] ?? [];
+  return SD_ICONS[props.icon] ?? [];
 });
 </script>
 

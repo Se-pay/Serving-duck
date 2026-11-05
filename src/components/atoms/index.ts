@@ -3,6 +3,10 @@ export {
   type ISDBaseInputProps
 } from './SDBaseInput.vue';
 export {
+  default as SDErrorMessage,
+  type ISDErrorMessageProps
+} from './SDErrorMessage.vue';
+export {
   default as SDFormField,
   type ISDFormFieldProps
 } from './SDFormField.vue';
@@ -19,3 +23,4 @@ export {
   type ISDTitleProps,
   type TSDTitleTag
 } from './SDTitle.vue';
+
